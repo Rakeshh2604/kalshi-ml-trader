@@ -27,19 +27,23 @@ BASE_URL = "https://api.elections.kalshi.com/trade-api/v2"
 
 
 def _load_auth() -> Optional[KalshiAuth]:
-    if not KALSHI_API_KEY_ID:
+    # Read directly from os.environ so Railway vars are never overridden by .env
+    api_key_id = os.environ.get("KALSHI_API_KEY_ID", "") or KALSHI_API_KEY_ID
+    if not api_key_id:
+        logger.warning("No API credentials — running in offline mode")
         return None
     try:
-        # Prefer inline PEM from env var (Railway/cloud deployments)
         pem = os.environ.get("KALSHI_PRIVATE_KEY_CONTENT", "")
         if pem:
-            # Railway may encode newlines as literal \n — fix that
             pem = pem.replace("\\n", "\n")
-        if not pem and KALSHI_PRIVATE_KEY_PATH:
-            pem = open(KALSHI_PRIVATE_KEY_PATH).read()
         if not pem:
+            key_path = os.environ.get("KALSHI_PRIVATE_KEY_PATH", "") or KALSHI_PRIVATE_KEY_PATH
+            if key_path:
+                pem = open(key_path).read()
+        if not pem:
+            logger.warning("No API credentials — running in offline mode")
             return None
-        return KalshiAuth(KALSHI_API_KEY_ID, pem)
+        return KalshiAuth(api_key_id, pem)
     except Exception as exc:
         logger.warning(f"Could not load Kalshi auth: {exc}")
         return None
