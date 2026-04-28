@@ -18,7 +18,7 @@ MIN_EDGE_THRESHOLD = 0.05     # minimum edge to consider a trade
 MAX_POSITION_SIZE = 50        # max dollars per trade
 STARTING_PAPER_BALANCE = 1000.0
 MIN_TIME_TO_CLOSE_HOURS = 1.0   # skip markets closing within this window
-MAX_TIME_TO_CLOSE_HOURS = 72.0  # skip markets closing more than 3 days away
+MAX_TIME_TO_CLOSE_HOURS = 24.0  # skip markets closing more than 24 hours away
 
 # Signal weights (must sum to 1.0)
 WEIGHT_MISPRICING = 0.40
