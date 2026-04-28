@@ -30,7 +30,7 @@ MAX_KELLY_FRACTION = 0.25     # quarter Kelly cap
 MIN_CONFIDENCE = 0.60         # minimum confidence to trade
 
 # ML model
-MODEL_PATH = os.getenv("MODEL_PATH", "kalshi_bot/model.pkl")
+MODEL_PATH = "kalshi_bot/model.pkl"
 SYNTHETIC_TRAIN_SAMPLES = 2000
 
 # News cache TTL (seconds)

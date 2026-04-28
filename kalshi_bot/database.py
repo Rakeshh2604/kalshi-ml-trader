@@ -5,8 +5,7 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-import os
-DB_PATH = os.environ.get("PAPER_DB_PATH", "kalshi_bot/kalshi_paper.db")
+DB_PATH = "kalshi_paper.db"
 
 
 def _connect() -> sqlite3.Connection:

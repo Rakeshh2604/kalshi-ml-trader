@@ -23,14 +23,6 @@ from kalshi_bot.risk import (
 from kalshi_bot.paper_trader import PaperTrader
 from kalshi_bot import database as db
 
-import os, shutil
-
-# On Railway, copy bundled model.pkl to persistent volume on first boot
-_model_path = os.environ.get("MODEL_PATH", "kalshi_bot/model.pkl")
-if not os.path.exists(_model_path) and os.path.exists("kalshi_bot/model.pkl"):
-    os.makedirs(os.path.dirname(_model_path), exist_ok=True)
-    shutil.copy("kalshi_bot/model.pkl", _model_path)
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
