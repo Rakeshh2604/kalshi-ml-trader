@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=False)  # don't override env vars already set by Railway
 
 # API credentials
 KALSHI_API_KEY_ID = os.getenv("KALSHI_API_KEY_ID", "")
