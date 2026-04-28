@@ -32,6 +32,9 @@ def _load_auth() -> Optional[KalshiAuth]:
     try:
         # Prefer inline PEM from env var (Railway/cloud deployments)
         pem = os.environ.get("KALSHI_PRIVATE_KEY_CONTENT", "")
+        if pem:
+            # Railway may encode newlines as literal \n — fix that
+            pem = pem.replace("\\n", "\n")
         if not pem and KALSHI_PRIVATE_KEY_PATH:
             pem = open(KALSHI_PRIVATE_KEY_PATH).read()
         if not pem:

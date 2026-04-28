@@ -1,11 +1,10 @@
 kalshi-python-sync>=2.0.0
 pandas>=2.1.0
 numpy>=1.26.0
-scikit-learn>=1.4.0
+scikit-learn==1.7.2
 xgboost>=2.0.0
 vaderSentiment>=3.3.2
 newsapi-python>=0.2.7
 requests>=2.31.0
 python-dotenv>=1.0.0
 schedule>=1.2.0
-shap>=0.44.0          # optional: ML feature importance (install separately if needed)
