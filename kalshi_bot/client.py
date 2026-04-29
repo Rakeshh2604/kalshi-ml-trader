@@ -29,6 +29,7 @@ BASE_URL = "https://api.elections.kalshi.com/trade-api/v2"
 def _load_auth() -> Optional[KalshiAuth]:
     # Read directly from os.environ so Railway vars are never overridden by .env
     api_key_id = os.environ.get("KALSHI_API_KEY_ID", "") or KALSHI_API_KEY_ID
+    logger.info(f"AUTH DEBUG: api_key_id={'SET' if api_key_id else 'EMPTY'} pem_env={'SET' if os.environ.get('KALSHI_PRIVATE_KEY_CONTENT') else 'EMPTY'}")
     if not api_key_id:
         logger.warning("No API credentials — running in offline mode")
         return None
