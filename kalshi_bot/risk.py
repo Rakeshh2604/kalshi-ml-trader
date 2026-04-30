@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 # Portfolio-level risk limits
 MAX_PORTFOLIO_HEAT = 0.60        # max fraction of balance deployed at once
-MAX_OPEN_POSITIONS = 8           # hard cap on simultaneous positions
+MAX_OPEN_POSITIONS = 20          # hard cap on simultaneous positions
 MAX_DAILY_LOSS_PCT = 0.15        # circuit breaker: halt if down >15% today
 CORR_SAME_CATEGORY_PENALTY = 0.70  # reduce size by 30% for same-category positions
 
