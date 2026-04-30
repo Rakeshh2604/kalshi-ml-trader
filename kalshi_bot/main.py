@@ -174,6 +174,9 @@ def run_scan_cycle():
             market.get("category", "unknown"),
         )
 
+        if size <= 0:
+            continue
+
         executed = trader.execute_paper_trade(market, combined["signal"], size)
         if executed:
             trades_this_cycle += 1
