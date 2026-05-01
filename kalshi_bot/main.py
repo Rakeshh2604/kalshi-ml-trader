@@ -189,10 +189,16 @@ def run_scan_cycle():
     )
 
 
+def daily_reset():
+    reset_daily_state(trader.balance)
+    logger.info(f"Daily state reset — new starting balance: ${trader.balance:.2f}")
+
+
 def main():
     logger.info("Kalshi Paper Trading Bot starting — PAPER TRADING - NO REAL ORDERS")
     reset_daily_state(trader.balance)
     schedule.every(SCAN_INTERVAL_SECONDS).seconds.do(run_scan_cycle)
+    schedule.every().day.at("00:00").do(daily_reset)
 
     run_scan_cycle()
 
