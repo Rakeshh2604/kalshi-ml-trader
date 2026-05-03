@@ -97,6 +97,7 @@ def run_scan_cycle():
 
     trades_this_cycle = 0
     evaluated = 0
+    MAX_TRADES_PER_CYCLE = 2  # never open more than 2 positions per scan cycle
 
     # Sort by 24h volume descending — evaluate the most liquid markets first
     markets = sorted(markets, key=lambda m: m.get("volume_24h", 0), reverse=True)
@@ -105,6 +106,11 @@ def run_scan_cycle():
     MAX_EVAL_PER_CYCLE = 200
 
     for market in markets:
+        if evaluated >= MAX_EVAL_PER_CYCLE:
+            break
+        if trades_this_cycle >= MAX_TRADES_PER_CYCLE:
+            break
+
         ticker = market["ticker"]
 
         if market.get("category", "").strip() == "Sports":
@@ -118,9 +124,6 @@ def run_scan_cycle():
             if reason not in ("already_in_market",):
                 logger.debug(f"Skip {ticker}: {reason}")
             continue
-
-        if evaluated >= MAX_EVAL_PER_CYCLE:
-            break
 
         # Market already has price/volume/bid/ask from events API — no extra call needed
         market.setdefault("price_momentum", 0.0)

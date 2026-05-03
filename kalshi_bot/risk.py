@@ -10,8 +10,8 @@ from kalshi_bot.config import MAX_KELLY_FRACTION, MAX_POSITION_SIZE
 logger = logging.getLogger(__name__)
 
 # Portfolio-level risk limits
-MAX_PORTFOLIO_HEAT = 0.60        # max fraction of balance deployed at once
-MAX_OPEN_POSITIONS = 12          # hard cap on simultaneous positions
+MAX_PORTFOLIO_HEAT = 0.50        # max fraction of balance deployed at once
+MAX_OPEN_POSITIONS = 8           # hard cap on simultaneous positions
 MAX_DAILY_LOSS_PCT = 0.20        # circuit breaker: halt if down >20% today
 CORR_SAME_CATEGORY_PENALTY = 0.70  # reduce size by 30% for same-category positions
 
