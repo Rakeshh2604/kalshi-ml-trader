@@ -124,11 +124,12 @@ class PaperTrader:
                 logger.info(f"[REAL SETTLEMENT] closing {ticker} → {'YES' if resolved_yes else 'NO'}")
                 self.close_position(ticker, resolved_yes)
             else:
-                # Market gone but no settlement data — mark as unknown, don't simulate
+                # Market gone but no settlement data — return capital, treat as scratch
                 pos = self.open_positions.pop(ticker, None)
                 if pos:
+                    self.balance += pos["size"]  # return cost; pnl=0 (neutral)
                     db.close_trade(pos["trade_id"], exit_price=None, pnl=0.0)
-                    logger.warning(f"[NO DATA] {ticker} expired with no settlement — marked neutral")
+                    logger.warning(f"[NO DATA] {ticker} expired with no settlement — marked neutral, returned ${pos['size']:.2f}")
 
     def get_portfolio_summary(self) -> dict:
         stats = db.get_performance_stats()

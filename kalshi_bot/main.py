@@ -190,8 +190,12 @@ def run_scan_cycle():
 
 
 def daily_reset():
+    from kalshi_bot.config import STARTING_PAPER_BALANCE
+    trader.balance = STARTING_PAPER_BALANCE
+    trader.open_positions.clear()
+    trader.total_pnl = 0.0
     reset_daily_state(trader.balance)
-    logger.info(f"Daily state reset — new starting balance: ${trader.balance:.2f}")
+    logger.info(f"Daily state reset — balance restored to ${trader.balance:.2f}")
 
 
 def main():
